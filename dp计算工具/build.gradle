@@ -1,0 +1,18 @@
+plugins {
+    id 'java-library'
+}
+jar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    archiveFileName = 'density.jar'
+    manifest {
+        attributes 'Main-Class': "com.kotlin.runjava.MyClass"
+    }
+
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+java {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+}
